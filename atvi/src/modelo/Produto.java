@@ -14,4 +14,10 @@ public class Produto {
 	public String getId() {
 		return id;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		Produto produto = (Produto) obj;
+		return produto.getId().equals(id);
+	}
 }

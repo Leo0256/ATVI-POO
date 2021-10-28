@@ -14,16 +14,16 @@ public class Cliente {
 	private List<Telefone> telefones;
 	private List<Produto> produtosConsumidos;
 	private List<Servico> servicosConsumidos;
-	public Object x;
 	
-	public Cliente(String nome, String nomeSocial, String genero, CPF cpf) {
+	public Cliente(String nome, String nomeSocial, String genero, CPF cpf, 
+			List<RG> rgs, List<Telefone> tels) {
 		this.nome = nome;
 		this.nomeSocial = nomeSocial;
 		this.genero = genero;
 		this.cpf = cpf;
-		this.rgs = new ArrayList<RG>();
+		this.rgs = rgs;
 		this.dataCadastro = LocalDate.now();
-		this.telefones = new ArrayList<Telefone>();
+		this.telefones = tels;
 		this.produtosConsumidos = new ArrayList<Produto>();
 		this.servicosConsumidos = new ArrayList<Servico>();
 	}
@@ -39,11 +39,36 @@ public class Cliente {
 	public List<Telefone> getTelefones() {
 		return telefones;
 	}
+	
 	public List<Produto> getProdutosConsumidos() {
 		return produtosConsumidos;
 	}
+	
+	public void addProdutoConsumido(Produto produto) {
+		produtosConsumidos.add(produto);
+	}
+	
+	public double getValorTotalProdutos() {
+		double total = 0;
+		for(Produto produto : produtosConsumidos) 
+			total += produto.valor;
+		
+		return total;
+	}
+	
 	public List<Servico> getServicosConsumidos() {
 		return servicosConsumidos;
 	}
 	
+	public void addServicoConsumido(Servico servico) {
+		servicosConsumidos.add(servico);
+	}
+	
+	public double getValorTotalServicos() {
+		double total = 0;
+		for(Servico servico : servicosConsumidos)
+			total += servico.valor;
+		
+		return total;
+	}
 }

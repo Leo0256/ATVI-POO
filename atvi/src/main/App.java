@@ -7,13 +7,23 @@ import negocio.CadastroCliente;
 import negocio.CadastroProduto;
 import negocio.CadastroServico;
 import negocio.listagem.Listagem;
-import negocio.listagem.ListarTodosClientes;
-import negocio.listagem.ListarTodosGenero;
+import negocio.listagem.clientes.ListarTodosClientes;
+import negocio.listagem.clientes.ListarTodosGenero;
+import negocio.listagem.clientes.ListarTop10Consomem;
+import negocio.listagem.clientes.ListarTop5MaisGastam;
+import negocio.listagem.produtos_servicos.ListarProdutos;
+import negocio.listagem.produtos_servicos.ListarServicos;
 
 public class App {
 	public static void main(String[] args) {
 		System.out.println("Bem-vindo ao cadastro de clientes do Grupo World Beauty");
 		Empresa empresa = new Empresa();
+		
+		// Dados prévios de Teste
+		new DadosTeste(empresa);
+		// 
+		
+		
 		boolean execucao = true;
 		while (execucao) {
 			System.out.println("======================================");
@@ -63,33 +73,39 @@ public class App {
 				System.out.println("0 - Voltar");
 				
 				int listarCliente = entrada.receberNumeroInteiro();
-				Listagem listagem;
+				Listagem listagemCli;
 				switch(listarCliente) {
 				case 0:
 					break;
 				
 				case 1:
 					// Listar todos
-					listagem = new ListarTodosClientes(empresa.getClientes());
-					listagem.listar();
+					listagemCli = new ListarTodosClientes(empresa.getClientes());
+					listagemCli.listar();
 					break;
 					
 				case 2:
 					// Listar todos por gênero
-					listagem = new ListarTodosGenero(empresa.getClientes());
-					listagem.listar();
+					listagemCli = new ListarTodosGenero(empresa.getClientes());
+					listagemCli.listar();
 					break;
 					
 				case 3:
 					// Listar os 10 que mais consomem
+					listagemCli = new ListarTop10Consomem(empresa.getClientes(), true);
+					listagemCli.listar();
 					break;
 					
 				case 4:
 					// Listar os 10 que menos consomem
+					listagemCli = new ListarTop10Consomem(empresa.getClientes(), false);
+					listagemCli.listar();
 					break;
 					
 				case 5: 
 					// Listar os 5 que mais gastam
+					listagemCli = new ListarTop5MaisGastam(empresa.getClientes());
+					listagemCli.listar();
 					break;
 					
 				default:
@@ -108,17 +124,21 @@ public class App {
 				System.out.println("0 - Voltar");
 				
 				int listarProdutoServico = entrada.receberNumeroInteiro();
-				
+				Listagem listagemPS;
 				switch(listarProdutoServico) {
 				case 0:
 					break;
 					
 				case 1:
 					// Listar produtos
+					listagemPS = new ListarProdutos(empresa.getProdutos());
+					listagemPS.listar();
 					break;
 					
 				case 2:
 					// Listar serviços
+					listagemPS = new ListarServicos(empresa.getServicos());
+					listagemPS.listar();
 					break;
 					
 				case 3:

@@ -14,4 +14,10 @@ public class Servico {
 	public String getId() {
 		return id;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		Servico servico = (Servico) obj;
+		return servico.getId().equals(id);
+	}
 }
