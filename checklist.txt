@@ -1,6 +1,6 @@
 !! Ver se cadastra produtos/serviços aos clientes
-!! Rever o diagrama de classes da aplicação
-#1 - Cadastrar cliente
+!! Opção de cadastrar produto/serviço consumido ao cliente?
+@1 - Cadastrar cliente
 #2 - Cadastrar produto
 #3 - Cadastrar serviço
 #4 - Listar clientes
@@ -14,7 +14,7 @@
 #5.1 - todos os produtos
 #5.2 - todos os serviços
 @5.3 - os mais consumidos
-5.4 - os mais consumidos por gênero
+5.4 - os mais consumidos por gênero (gênero do cliente que consome)
 
 
 
