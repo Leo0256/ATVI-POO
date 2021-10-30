@@ -11,6 +11,8 @@ public class Produto {
 		this.valor = valor;
 	}
 	
+	public Produto() {}
+	
 	public String getId() {
 		return id;
 	}
@@ -18,6 +20,6 @@ public class Produto {
 	@Override
 	public boolean equals(Object obj) {
 		Produto produto = (Produto) obj;
-		return produto.getId().equals(id);
+		return id.equals(produto.getId());
 	}
 }

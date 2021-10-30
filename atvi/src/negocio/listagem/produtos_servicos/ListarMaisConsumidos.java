@@ -13,54 +13,54 @@ import negocio.listagem.Sortable;
 
 public class ListarMaisConsumidos extends Listagem implements Sortable {
 	private List<Cliente> clientes;
+	private List<Contador> contProdutos = new ArrayList<Contador>();
+	private List<Contador> contServicos = new ArrayList<Contador>();
 	
 	public ListarMaisConsumidos(List<Cliente> clientes) {
 		this.clientes = clientes;
-		setCountProdutos();
-		setCountServicos();
+		setContProdutos();
+		setContServicos();
 		sort();
 	}
 	
-	private class Contador {
-		public Object item;
-		public int size;
-		public Contador(Object item, int size) {
-			this.item = item;
-			this.size = size;
+	private void setContProdutos() {
+		List<Produto> produtos;
+		for(Cliente cliente : clientes) {
+			produtos = cliente.getProdutosConsumidos();
+			
+			if(contProdutos.isEmpty())
+				contProdutos.add(new Contador(produtos.get(0), 0));
+			
+			for(Produto produto : produtos) {
+				for(int cont = 0; cont < contProdutos.size(); cont++) {
+					if(contProdutos.get(cont).equals(produto)) 
+						contProdutos.get(cont).size++;
+					else
+						contProdutos.add(new Contador(produto, 1));
+				}
+			}
 		}
 	}
 	
-	private List<Contador> countProdutos = new ArrayList<Contador>();
-	private void setCountProdutos() {
-		List<Produto> prds;
+	private void setContServicos() {
+		List<Servico> servicos;
 		for(Cliente cliente : clientes) {
-			prds = cliente.getProdutosConsumidos();
-			for(Produto prd : prds)
-				for(Contador obj : countProdutos) {
-					if(prd.equals((Produto) obj.item)) 
-						obj.size++;
-					
+			servicos = cliente.getServicosConsumidos();
+			
+			if(contServicos.isEmpty())
+				contServicos.add(new Contador(servicos.get(0), 0));
+			
+			for(Servico servico : servicos) {
+				for(int cont = 0; cont < contServicos.size(); cont++) {
+					if(contServicos.get(cont).equals(servico)) 
+						contServicos.get(cont).size++;
 					else
-						countProdutos.add(new Contador(prd, 1));
+						contServicos.add(new Contador(servico, 1));
 				}
+			}
 		}
 	}
 	
-	private List<Contador> countServicos = new ArrayList<Contador>();
-	private void setCountServicos() {
-		List<Servico> srvs;
-		for(Cliente cliente : clientes) {
-			srvs = cliente.getServicosConsumidos();
-			for(Servico srv : srvs)
-				for(Contador obj : countServicos) {
-					if(srv.equals((Servico) obj.item)) 
-						obj.size++;
-					
-					else
-						countServicos.add(new Contador(srv, 1));
-				}
-		}
-	}
 	
 	@Override
 	public void listar() {
@@ -68,7 +68,7 @@ public class ListarMaisConsumidos extends Listagem implements Sortable {
 		
 		int flag = 1;
 		System.out.println("\nProdutos:");
-		for(Contador cont : countProdutos) {
+		for(Contador cont : contProdutos) {
 			System.out.println(flag + "º:\n");
 			
 			Produto foo = (Produto) cont.item;
@@ -83,7 +83,7 @@ public class ListarMaisConsumidos extends Listagem implements Sortable {
 		
 		flag = 1;
 		System.out.println("\nServiços:");
-		for(Contador cont : countServicos) {
+		for(Contador cont : contServicos) {
 			System.out.println(flag + "º:\n");
 			
 			Servico foo = (Servico) cont.item;
@@ -106,8 +106,8 @@ public class ListarMaisConsumidos extends Listagem implements Sortable {
 			}
 		};
 		
-		Collections.sort(countProdutos, comparar);
-		Collections.sort(countServicos, comparar);
+		Collections.sort(contProdutos, comparar);
+		Collections.sort(contServicos, comparar);
 	}
 
 }

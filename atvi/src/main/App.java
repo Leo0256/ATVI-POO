@@ -4,6 +4,7 @@ import io.Entrada;
 import modelo.Empresa;
 import negocio.Cadastro;
 import negocio.CadastroCliente;
+import negocio.CadastroConsumo;
 import negocio.CadastroProduto;
 import negocio.CadastroServico;
 import negocio.listagem.Listagem;
@@ -11,6 +12,8 @@ import negocio.listagem.clientes.ListarTodosClientes;
 import negocio.listagem.clientes.ListarTodosGenero;
 import negocio.listagem.clientes.ListarTop10Consomem;
 import negocio.listagem.clientes.ListarTop5MaisGastam;
+import negocio.listagem.produtos_servicos.ListarMaisConsumidos;
+import negocio.listagem.produtos_servicos.ListarMaisConsumidosGenero;
 import negocio.listagem.produtos_servicos.ListarProdutos;
 import negocio.listagem.produtos_servicos.ListarServicos;
 
@@ -46,8 +49,34 @@ public class App {
 				
 			case 1:
 				// Cadastrar cliente
-				Cadastro cadastro = new CadastroCliente(empresa.getClientes());
-				cadastro.cadastrar();
+				System.out.println("--------------------------------------");
+				System.out.println("Cadastro de Cliente");
+				System.out.println("O que gostaria de fazer?");
+				System.out.println("1 - Cadastrar um novo cliente");
+				System.out.println("2 - Adicionar um produto/serviço a um cliente");
+				System.out.println("0 - Voltar");
+				
+				int cadastroCliente = entrada.receberNumeroInteiro();
+				Cadastro cadastro;
+				switch(cadastroCliente) {
+				case 0:
+					break;
+					
+				case 1:
+					// Novo cliente
+					cadastro = new CadastroCliente(empresa.getClientes());
+					cadastro.cadastrar();
+					break;
+					
+				case 2:
+					// Adicionar um produto/serviço a um cliente
+					
+					break;
+					
+				default:
+					System.out.println("Operação não entendida");
+				}
+				
 				break;
 				
 			case 2:
@@ -143,10 +172,14 @@ public class App {
 					
 				case 3:
 					// Listar produtos e serviços mais consumidos
+					listagemPS = new ListarMaisConsumidos(empresa.getClientes());
+					listagemPS.listar();
 					break;
 					
 				case 4:
 					// Listar produtos e serviços mais consumidos por gênero
+					listagemPS = new ListarMaisConsumidosGenero(empresa.getClientes());
+					listagemPS.listar();
 					break;
 					
 				default:

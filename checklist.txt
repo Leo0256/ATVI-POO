@@ -1,8 +1,12 @@
-!! Ver se cadastra produtos/serviços aos clientes
-!! Opção de cadastrar produto/serviço consumido ao cliente?
+!! Usar dados de teste de um arquivo json? se sim, pode fazer uma função recursiva para cadastrar tudo
+!! Rever a verificação de I/O em cada funcionalidade
 @1 - Cadastrar cliente
+#1.1 - novo cliente
+@1.2 - adicionar produto/serviço ao cliente (recursivamente seria legal)
 #2 - Cadastrar produto
 #3 - Cadastrar serviço
+
+!! Rever depois de terminar tudo
 #4 - Listar clientes
 #4.1 - todos
 #4.2 - todos por gênero
@@ -10,11 +14,11 @@
 #4.4 - 10 que menos consomem
 #4.5 - 5 que mais gastam
 
-5 - Listar produtos e serviços
+#5 - Listar produtos e serviços
 #5.1 - todos os produtos
 #5.2 - todos os serviços
-@5.3 - os mais consumidos
-5.4 - os mais consumidos por gênero (gênero do cliente que consome)
+#5.3 - os mais consumidos
+#5.4 - os mais consumidos por gênero (gênero do cliente que consome)
 
 
 

@@ -58,6 +58,10 @@ public class CadastroCliente extends Cadastro {
 			Cliente cliente = new Cliente(nome, nomeSocial, genero, cpf, rgs, tels);
 			this.clientes.add(cliente);
 			
+			
+			// Ação de cadastrar produto/serviço ao cliente
+			
+			
 			System.out.println("\nQuer cadastrar mais um cliente?");
 			System.out.println("1 - Sim");
 			System.out.println("0 - Não");

@@ -48,27 +48,11 @@ public class Cliente {
 		produtosConsumidos.add(produto);
 	}
 	
-	public double getValorTotalProdutos() {
-		double total = 0;
-		for(Produto produto : produtosConsumidos) 
-			total += produto.valor;
-		
-		return total;
-	}
-	
 	public List<Servico> getServicosConsumidos() {
 		return servicosConsumidos;
 	}
 	
 	public void addServicoConsumido(Servico servico) {
 		servicosConsumidos.add(servico);
-	}
-	
-	public double getValorTotalServicos() {
-		double total = 0;
-		for(Servico servico : servicosConsumidos)
-			total += servico.valor;
-		
-		return total;
 	}
 }
