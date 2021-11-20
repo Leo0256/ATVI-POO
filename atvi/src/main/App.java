@@ -70,7 +70,8 @@ public class App {
 					
 				case 2:
 					// Adicionar um produto/serviço a um cliente
-					
+					cadastro = new CadastroConsumo(empresa.getClientes(), empresa.getProdutos(), empresa.getServicos());
+					cadastro.cadastrar();
 					break;
 					
 				default:
@@ -172,13 +173,13 @@ public class App {
 					
 				case 3:
 					// Listar produtos e serviços mais consumidos
-					listagemPS = new ListarMaisConsumidos(empresa.getClientes());
+					listagemPS = new ListarMaisConsumidos(empresa.getClientes(), empresa.getProdutos(), empresa.getServicos());
 					listagemPS.listar();
 					break;
 					
 				case 4:
 					// Listar produtos e serviços mais consumidos por gênero
-					listagemPS = new ListarMaisConsumidosGenero(empresa.getClientes());
+					listagemPS = new ListarMaisConsumidosGenero(empresa.getClientes(), empresa.getProdutos(), empresa.getServicos());
 					listagemPS.listar();
 					break;
 					

@@ -51,6 +51,7 @@ public class DadosTeste {
 				tels1
 				);
 		cli1.addProdutoConsumido(produtos.get(0));
+		cli1.addProdutoConsumido(produtos.get(0));
 		cli1.addServicoConsumido(servicos.get(0));
 		
 		Cliente cli2 = new Cliente(

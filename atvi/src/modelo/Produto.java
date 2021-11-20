@@ -22,4 +22,8 @@ public class Produto {
 		Produto produto = (Produto) obj;
 		return id.equals(produto.getId());
 	}
+	
+	public boolean equals(String id) {
+		return this.id.equals(id);
+	}
 }

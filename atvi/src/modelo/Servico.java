@@ -22,4 +22,8 @@ public class Servico {
 		Servico servico = (Servico) obj;
 		return id.equals(servico.getId());
 	}
+	
+	public boolean equals(String id) {
+		return this.id.equals(id);
+	}
 }

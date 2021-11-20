@@ -13,49 +13,54 @@ import negocio.listagem.Sortable;
 
 public class ListarMaisConsumidos extends Listagem implements Sortable {
 	private List<Cliente> clientes;
+	private List<Produto> produtos = new ArrayList<>();
+	private List<Servico> servicos = new ArrayList<>();
+	
+	
 	private List<Contador> contProdutos = new ArrayList<Contador>();
 	private List<Contador> contServicos = new ArrayList<Contador>();
 	
-	public ListarMaisConsumidos(List<Cliente> clientes) {
+	public ListarMaisConsumidos(List<Cliente> clientes, List<Produto> produtos, List<Servico> servicos) {
 		this.clientes = clientes;
+		this.produtos = produtos;
+		this.servicos = servicos;
+		
 		setContProdutos();
 		setContServicos();
 		sort();
 	}
 	
 	private void setContProdutos() {
-		List<Produto> produtos;
+		List<Produto> produtosCliente;
+		
+		for(Produto produto : produtos) 
+			contProdutos.add(new Contador(produto, 0));
+		
 		for(Cliente cliente : clientes) {
-			produtos = cliente.getProdutosConsumidos();
+			produtosCliente = cliente.getProdutosConsumidos();
 			
-			if(contProdutos.isEmpty())
-				contProdutos.add(new Contador(produtos.get(0), 0));
-			
-			for(Produto produto : produtos) {
+			for(Produto produto : produtosCliente) {
 				for(int cont = 0; cont < contProdutos.size(); cont++) {
 					if(contProdutos.get(cont).equals(produto)) 
 						contProdutos.get(cont).size++;
-					else
-						contProdutos.add(new Contador(produto, 1));
 				}
 			}
 		}
 	}
 	
 	private void setContServicos() {
-		List<Servico> servicos;
+		List<Servico> servicosCliente;
+		
+		for(Servico servico : servicos)
+			contServicos.add(new Contador(servico, 0));
+		
 		for(Cliente cliente : clientes) {
-			servicos = cliente.getServicosConsumidos();
+			servicosCliente = cliente.getServicosConsumidos();
 			
-			if(contServicos.isEmpty())
-				contServicos.add(new Contador(servicos.get(0), 0));
-			
-			for(Servico servico : servicos) {
+			for(Servico servico : servicosCliente) {
 				for(int cont = 0; cont < contServicos.size(); cont++) {
 					if(contServicos.get(cont).equals(servico)) 
 						contServicos.get(cont).size++;
-					else
-						contServicos.add(new Contador(servico, 1));
 				}
 			}
 		}

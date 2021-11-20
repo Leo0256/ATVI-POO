@@ -13,47 +13,52 @@ import negocio.listagem.Sortable;
 
 public class ListarMaisConsumidosGenero  extends Listagem implements Sortable {
 	private List<Cliente> clientes;
+	private List<Produto> produtos = new ArrayList<>();
+	private List<Servico> servicos = new ArrayList<>();
+	
 	private List<Contador> contProdutosM = new ArrayList<Contador>();
 	private List<Contador> contServicosM = new ArrayList<Contador>();
 	
 	private List<Contador> contProdutosF = new ArrayList<Contador>();
 	private List<Contador> contServicosF = new ArrayList<Contador>();
 	
-	public ListarMaisConsumidosGenero(List<Cliente> clientes) {
+	public ListarMaisConsumidosGenero(List<Cliente> clientes, List<Produto> produtos, List<Servico> servicos) {
 		this.clientes = clientes;
+		this.produtos = produtos;
+		this.servicos = servicos;
+		
 		setContProdutos();
 		setContServicos();
 		sort();
 	}
 	
 	private void setContProdutos() {
-		List<Produto> produtos;
+		List<Produto> produtosCliente;
+		
+		for(Produto produto : produtos) {
+			contProdutosM.add(new Contador(produto, 0));
+			contProdutosF.add(new Contador(produto, 0));
+		}
+		
 		for(Cliente cliente : clientes) {
-			produtos = cliente.getProdutosConsumidos();
+			produtosCliente = cliente.getProdutosConsumidos();
 			
+			// M
 			if(cliente.genero.compareTo("M") == 0) {
-				if(contProdutosM.isEmpty())
-					contProdutosM.add(new Contador(produtos.get(0), 0));
-				
-				for(Produto produto : produtos) {
+				for(Produto produto : produtosCliente) {
 					for(int cont = 0; cont < contProdutosM.size(); cont++) {
 						if(contProdutosM.get(cont).equals(produto)) 
 							contProdutosM.get(cont).size++;
-						else
-							contProdutosM.add(new Contador(produto, 1));
 					}
 				}
 			}
+			// F
 			else {
-				if(contProdutosF.isEmpty())
-					contProdutosF.add(new Contador(produtos.get(0), 0));
 				
-				for(Produto produto : produtos) {
+				for(Produto produto : produtosCliente) {
 					for(int cont = 0; cont < contProdutosF.size(); cont++) {
 						if(contProdutosF.get(cont).equals(produto)) 
 							contProdutosF.get(cont).size++;
-						else
-							contProdutosF.add(new Contador(produto, 1));
 					}
 				}
 			}
@@ -61,33 +66,31 @@ public class ListarMaisConsumidosGenero  extends Listagem implements Sortable {
 	}
 	
 	private void setContServicos() {
-		List<Servico> servicos;
+		List<Servico> servicosCliente;
+		
+		for(Servico servico : servicos) {
+			contServicosM.add(new Contador(servico, 0));
+			contServicosF.add(new Contador(servico, 0));
+		}
+		
 		for(Cliente cliente : clientes) {
-			servicos = cliente.getServicosConsumidos();
+			servicosCliente = cliente.getServicosConsumidos();
 			
+			// M
 			if(cliente.genero.compareTo("M") == 0) {
-				if(contServicosM.isEmpty())
-					contServicosM.add(new Contador(servicos.get(0), 0));
-				
-				for(Servico servico : servicos) {
+				for(Servico servico : servicosCliente) {
 					for(int cont = 0; cont < contServicosM.size(); cont++) {
 						if(contServicosM.get(cont).equals(servico)) 
 							contServicosM.get(cont).size++;
-						else
-							contServicosM.add(new Contador(servico, 1));
 					}
 				}
 			}
+			// F
 			else {
-				if(contServicosF.isEmpty())
-					contServicosF.add(new Contador(servicos.get(0), 0));
-				
 				for(Servico servico : servicos) {
 					for(int cont = 0; cont < contServicosF.size(); cont++) {
 						if(contServicosF.get(cont).equals(servico)) 
 							contServicosF.get(cont).size++;
-						else
-							contServicosF.add(new Contador(servico, 1));
 					}
 				}
 			}
