@@ -5,6 +5,8 @@ import java.util.Comparator;
 import java.util.List;
 
 import modelo.Cliente;
+import modelo.Produto;
+import modelo.Servico;
 import negocio.listagem.Listagem;
 import negocio.listagem.Sortable;
 
@@ -34,9 +36,20 @@ public class ListarTop10Consomem extends Listagem implements Sortable {
 			System.out.println("CPF: " + cliente.getCpf().getValor());
 			
 			System.out.println("Total de protudos e serviços consumidos:");
+			
 			total = cliente.getProdutosConsumidos().size() + 
 					cliente.getServicosConsumidos().size();
-			System.out.println(" - " + total + " produtos/serviços");
+			System.out.println("(" + total + " produtos/serviços)");
+			
+			System.out.println("\nProdutos:");
+			for (Produto produto : cliente.getProdutosConsumidos()) {
+				System.out.println(" - " + produto.nome);
+			}
+			
+			System.out.println("\nServiços:");
+			for (Servico servico : cliente.getServicosConsumidos()) {
+				System.out.println(" - " + servico.nome);
+			}
 			
 			System.out.println("--------------------------------------");
 			if(flag++ > 10) break;

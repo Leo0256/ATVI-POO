@@ -24,7 +24,7 @@ public class CadastroServico extends Cadastro {
 		double valor = entrada.receberNumeroDouble();
 		
 		System.out.println("Por favor informe o id do serviço:");
-		String id = entrada.receberTexto();
+		String id = new Entrada().receberTexto();
 		
 		Servico servico = new Servico(id, nome, valor);
 		this.servicos.add(servico);

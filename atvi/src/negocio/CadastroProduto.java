@@ -24,7 +24,7 @@ public class CadastroProduto extends Cadastro {
 		double valor = entrada.receberNumeroDouble();
 		
 		System.out.println("Por favor informe o id do produto:");
-		String id = entrada.receberTexto();
+		String id = new Entrada().receberTexto();
 		
 		Produto produto = new Produto(id, nome, valor);
 		this.produtos.add(produto);
